@@ -6,6 +6,7 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { UserModule } from 'src/user/user.module';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LoginValidationMiddleware } from './middlewares/login-validation.middleware';
+import { GoogleStrategy } from './strategies/google.strategy';
 
 @Module({
   imports: [UserModule,
@@ -14,10 +15,10 @@ import { LoginValidationMiddleware } from './middlewares/login-validation.middle
         secret: process.env.JWT_SECRET,
         signOptions: { expiresIn: "30d" }
       }
-    )
+    ),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy]
+  providers: [AuthService, LocalStrategy, JwtStrategy, GoogleStrategy]
 })
 export class AuthModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
